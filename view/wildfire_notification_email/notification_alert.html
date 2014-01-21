@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>National Express</title>
+  <style>
+    *{
+      font-family:helvetica;
+      color:#5b5b5b;
+      margin:0;
+      padding:0;
+    }
+    img{
+      border:none;
+    }
+    h1{
+      font-size:15px;
+      color:#00c1b4;
+    }
+    h3{
+      font-size:15px;
+      color:#00c1b4;
+      line-height:1.5em;
+    }
+    p{
+      font-size:11px;
+      margin:10px 0;
+      color:#6a6a6a;
+      line-height:1.5em;
+    }
+    a{
+      color:#2275A1;
+      text-decoration:none;
+    }
+  </style>
+</head>
+<body>
+<div id="wrapper" style="width:600px;font-family:Arial, Helvetica sans-serif; color:#393939; font-size:13px;margin:0;padding:0">
+
+  <table border="0" width="600" cellspacing="0" cellpadding="0">
+
+
+    <tr>
+      <td style="padding:5px">
+        <table border="0" width="590" cellspacing="0" cellpadding="0">
+          <tr>
+          <td valign="top">
+            <h3><font style="color:#7A8A98 !important;" size="5">Notifcations</font></h3>
+
+            <p>Recent changes are listed below</p>
+            <table border="0" width="570" cellspacing="2" cellpadding="2" style='padding:10px'>
+              <?foreach($data as $r):?>
+              <tr>
+                <td class='title'><?=$r->title?></td>
+                <td class='title'><?=strip_tags($r->content, "<a>")?></td>
+                <td class='on'><em>on:</em>&nbsp;&nbsp;<?=date("jS M Y H:i", strtotime($r->date_created) )?></td>
+              </tr>
+              <?endforeach?>
+            </table>
+
+
+          </td>
+
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+  </table>
+</div>
+</body>
+</html>

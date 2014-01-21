@@ -23,7 +23,18 @@ class WildfireNotification extends WaxModel{
     $this->date_created = $time = date("Y-m-d H:i:s");
     $this->title = (($controller->singular) ? $controller->singular : $controller->module_name) . " (".$name.") has been updated.";
     $this->content = "<p><a href='/admin/users/edit/".$controller->current_user->primval."/'>".$controller->current_user->username."</a> edited <a href='/admin/".$controller->module_name."/edit/".$model->primval."/'>".$name."</a> at ".$time."</p>";
-    return $this->save();
+    if($saved = $this->save()){
+      if(Config::get("wildfire.notifications/each_time") == true){
+        $user = new WildfireUser;
+        $users =$user->filter("recieve_notifications", 1)->all();
+        $email = new WildfireNotificationEmail;
+        $to = "";
+        foreach($users as $u) $to .= $u->email.",";
+        $to = trim($to, ",");
+        if(strlen($to)) $email->send_notification_alert(array($saved), Config::get("wildfire.notifications/from"), $to);
+      }
+    }
+    return false;
   }
 
   public function recent(){
