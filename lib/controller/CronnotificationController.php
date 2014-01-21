@@ -8,15 +8,17 @@ class CronnotificationController extends WaxController{
   }
 
   public function index(){
-    $notify = new WildfireNotification;
-    $data= $notify->filter("exported", 0)->all();
-    $user = new WildfireUser;
-    $users =$user->filter("recieve_notifications", 1)->all();
-    $email = new WildfireNotificationEmail;
-    $to = "";
-    foreach($users as $u) $to .= $u->email.",";
-    $to = trim($to, ",");
-    if(strlen($to)) $email->send_notification_alert($data, Config::get("wildfire.notifications/from"), $to);
+    if(Config::get("wildfire.notifications/cron")){
+      $notify = new WildfireNotification;
+      $data= $notify->filter("exported", 0)->all();
+      $user = new WildfireUser;
+      $users =$user->filter("recieve_notifications", 1)->all();
+      $email = new WildfireNotificationEmail;
+      $to = "";
+      foreach($users as $u) $to .= $u->email.",";
+      $to = trim($to, ",");
+      if(strlen($to)) $email->send_notification_alert($data, Config::get("wildfire.notifications/from"), $to);
+    }
     exit;
   }
 
