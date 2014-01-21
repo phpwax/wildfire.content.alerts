@@ -52,6 +52,7 @@
             <p>Recent changes are listed below</p>
             <table border="0" width="570" cellspacing="2" cellpadding="2" style='padding:10px'>
               <?foreach($data as $r):?>
+                <?$r->update_attributes(array('exported'=>1))?>
               <tr>
                 <td class='title'><?=$r->title?></td>
                 <td class='title'><?=strip_tags($r->content, "<a>")?></td>
