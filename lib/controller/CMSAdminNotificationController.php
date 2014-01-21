@@ -5,7 +5,7 @@ class CMSAdminNotificationController extends AdminComponent {
   public $module_name = "notification";
   public $model_class = 'WildfireNotification';
   public $display_name = "Notifications";
-  public $dashboard = false;
+  public $dashboard = true;
   public $exportable = true;
   public $singular = "Notification";
   public $filter_fields=array(

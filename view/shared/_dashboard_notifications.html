@@ -1,0 +1,16 @@
+<?if($current_user->recieve_notifications && ($m = new WildfireNotification) && ($content = $m->recent() )  && $content->count()):?>
+<div class='row indented live-content'>
+  <h2>Recent Notifications</h2>
+  <div class='listing'>
+      <table>
+      <?foreach($content as $r):?>
+      <tr>
+        <td class='title'><?=$r->title?></td>
+        <td class='title'><?=strip_tags($r->content, "<a>")?></td>
+        <td class='on'><em>on:</em>&nbsp;&nbsp;<?=date("jS M Y H:i", strtotime($r->date_created) )?></td>
+      </tr>
+      <?endforeach?>
+      </table>
+    </div>
+</div>
+<?endif?>
